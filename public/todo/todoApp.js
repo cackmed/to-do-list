@@ -4,8 +4,6 @@ import Loading from '../common/Loading.js';
 import AddTodo from './AddTodo.js';
 import TodoList from './TodoList.js';
 import { getTodos, addTodo, updateTodo, removeTodo } from '../services/todo-api.js';
-import { types } from 'util';
-
 class TodoApp extends Component {
 
     async onRender(dom) {
@@ -51,7 +49,7 @@ class TodoApp extends Component {
                     const updated = await updateTodo(todo);
                     const todos = this.state.todos;
                     const index = todos.indexOf(todo);
-                    types.slice(index, 1, updated);
+                    todos.slice(index, 1, updated);
 
                     toDoList.update({ todos });
                 }
