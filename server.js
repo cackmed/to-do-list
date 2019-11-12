@@ -23,11 +23,7 @@ app.use(express.json()); // enable reading incoming json data
 app.get('/api/todos', async (req, res) => {
     try {
         const result = await client.query(`
-            SELECT
-                t.task
-                t.complete
-            FROM todos t
-            ORDER BY t.task
+            SELECT * FROM todos;
         `);
         res.json(result.rows);
     }

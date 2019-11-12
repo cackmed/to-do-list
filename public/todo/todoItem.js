@@ -26,12 +26,12 @@ class TodoItem extends Component {
 
         return /*html*/`
     <li class = "to-do-task">
-        <span class="${todo.inactive ? 'inactive' : ''}">"${todo.taks}</span>
+        <span class="${todo.inactive ? 'inactive' : ''}">"${todo.tasks}</span>
         <div>
             <button class="inactive-button">
                 Make ${todo.inactive ? 'Active' : 'inactive'}
             </button>
-            <button> Remove Task </button>
+            <button class="remove-button"> Remove Task </button>
         </div>
     </li>
             
