@@ -13,7 +13,7 @@ class App extends Component {
             <div>
                 <!-- header goes here -->
                 <main>
-                    <p>This will be the user login on day 2</p>
+                    <p>This will be the user login on day 2 or will it?</p>
                 </main>
             </div>
         `;
