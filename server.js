@@ -42,7 +42,7 @@ app.post('/api/todos', async (req, res) => {
     try {
         const result = await client.query(`
             INSERT INTO todos (task, complete)
-            VALUES (1$, 2$)
+            VALUES ($1, $2)
             RETURNING *
         `,
         [todo.task, todo.complete]);
@@ -88,7 +88,7 @@ app.delete('/api/todos/:id', async (req, res) => {
     try {
         const result = await client.query(`
          DELETE FROM todos
-         WHERE id= $1
+         WHERE id = $1
          RETURNING *;
         `, [id]);
         
