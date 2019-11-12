@@ -25,7 +25,7 @@ class TodoItem extends Component {
         const todo = this.props.todo;
 
         return /*html*/`
-    <li class = "to-do-list">
+    <li class = "to-do-task">
         <span class="${todo.inactive ? 'inactive' : ''}">"${todo.taks}</span>
         <div>
             <button class="inactive-button">
