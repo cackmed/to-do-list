@@ -21,11 +21,9 @@ app.use(express.json()); // enable reading incoming json data
 
 // *** TODOS ***
 app.get('/api/todos', async (req, res) => {
-
     try {
-        console.log('hello');
         const result = await client.query(`
-            SELECT 
+            SELECT
                 t.task
                 t.complete
             FROM todos t

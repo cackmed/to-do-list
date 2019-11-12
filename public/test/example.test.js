@@ -1,4 +1,4 @@
-import TodoItem from '../todo-list/TodoItem.js';
+//import TodoItem from '../todo-list/TodoItem.js';
 const test = QUnit.test;
 
 QUnit.module('Render Todo Item');
