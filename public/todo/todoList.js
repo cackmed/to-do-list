@@ -1,5 +1,5 @@
 import Component from '../Component.js';
-import TodoItem from './TodoItem.js';
+import TodoItem from './todoItem.js';
 
 class TodoList extends Component {
     
