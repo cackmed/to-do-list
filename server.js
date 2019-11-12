@@ -60,16 +60,16 @@ app.post('/api/todos', async (req, res) => {
 app.put('/api/todos/:id', async (req, res) => {
     const id = req.params.id;
     const todo = req.body;
-
+    console.log(todo);
     try {
         const result = await client.query(`
             UPDATE todos
             SET   task = $2,
-                  inactive = $3  
+                  complete = $3  
             WHERE id = $1
             RETURNING *;
         `, 
-        [id, todo.task, todo.inactive]);
+        [id, todo.task, todo.complete]);
      
         res.json(result.rows[0]);
     }

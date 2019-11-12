@@ -9,12 +9,13 @@ class TodoItem extends Component {
 
         const markOffItem = dom.querySelector('.inactive-button');
         markOffItem.addEventListener('click', () => {
-            todo.true = !todo.true;
+            todo.complete = !todo.complete;
+            console.log(todo);
             onUpdate(todo);
         });
         const removeItem = dom.querySelector('.remove-button');
         removeItem.addEventListener('click', () => {
-            const confirmed = confirm('Are you sure you want to remove ${todo.task}');
+            const confirmed = confirm('Are you sure you want to remove this task?');
             if (confirmed) {
                 onRemove(todo);
             }
@@ -27,10 +28,10 @@ class TodoItem extends Component {
         return /*html*/`
     <li class = "to-do-task">
         <p class=>${todo.task}</p>
-        <span class="${todo.true ? 'false' : ''}">Is it complete? "${todo.complete}</span>
+        <span class="${todo.complete ? 'false' : ''}">Is it complete? "${todo.complete}</span>
         <div>
             <button class="inactive-button">
-                Toggle ${todo.false ? 'Not Complete' : 'Complete'}
+                Toggle ${todo.complete ? 'Not Complete' : 'Complete'}
             </button>
             <button class="remove-button"> Remove Task </button>
         </div>
