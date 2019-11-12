@@ -23,6 +23,7 @@ app.use(express.json()); // enable reading incoming json data
 app.get('/api/todos', async (req, res) => {
 
     try {
+        console.log('hello');
         const result = await client.query(`
             SELECT
                 t.task
