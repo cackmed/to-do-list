@@ -1,25 +1,23 @@
-//import TodoItem from '../todo-list/TodoItem.js';
+import TodoItem from '../todo/todoItem.js';
 const test = QUnit.test;
 
 QUnit.module('Render Todo Item');
 
 test('renders html from data', assert => {
-    // arrange
-    // const todo = {
-    //     id: 3,
-    //     task: 'Tested Design',
-    //     complete: true
-    // };
+    const todo = {
+        id: 3,
+        task: 'Tested Design',
+        complete: true
+    };
 
-    // const expected = /*html*/`
-        
-    // `;
+    const expected = /*html*/`
+        <li class = \"to-do-task\"> <p class=>Tested Design</p> <span class=\"false\">Is it complete? \"true</span> <div> <button class=\"inactive-button\"> Toggle Not Complete </button> <button class=\"remove-button\"> Remove Task </button> </div> </li>
+    `;
 
-    // // act
-    // const todoItem = new TodoItem({ todo: todo });
-    // const html = todoItem.renderHTML();
+    // act
+    const todoItem = new TodoItem({ todo: todo });
+    const html = todoItem.renderHTML();
     
-    // // assert
-    // assert.htmlEqual(html, expected);
-    assert.equal(true, true);
+    // assert
+    assert.htmlEqual(html, expected);
 });
