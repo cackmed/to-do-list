@@ -63,8 +63,9 @@ class TodoApp extends Component {
             onRemove: async todo => {
                 loading.update({ loading: true });
                 error.textContent = '';
+                console.log('helloooooo!');
                 try {
-                    await removeTodo(todo.task);
+                    await removeTodo(todo.id);
                     const todos = this.state.todos;
                     const index = todos.indexOf(todo);
                     todos.splice(index, 1);

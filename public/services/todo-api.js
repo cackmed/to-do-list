@@ -41,6 +41,7 @@ export function updateTodo(todo) {
 }
 
 export function removeTodo(todoId) {
+    console.log(todoId);
     const url = `${URL}/todos/${todoId}`;
     return fetchWithError(url, {
         method: 'DELETE'
