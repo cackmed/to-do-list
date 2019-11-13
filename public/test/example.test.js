@@ -11,7 +11,7 @@ test('renders html from data', assert => {
     };
 
     const expected = /*html*/`
-        <li class = \"to-do-task\"> <p class=>Tested Design</p> <span class=\"false\">Is it complete? \"true</span> <div> <button class=\"inactive-button\"> Toggle Not Complete </button> <button class=\"remove-button\"> Remove Task </button> </div> </li>
+        <li class = "to-do-task"> <p class=>Tested Design</p> <span class="false">Is it complete? "true</span> <div> <button class="inactive-button"> Toggle Not Complete </button> <button class="remove-button"> Remove Task </button> </div> </li>
     `;
 
     // act
