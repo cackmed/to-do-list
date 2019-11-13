@@ -1,7 +1,7 @@
 import TodoItem from '../todo/todoItem.js';
-const test = QUnit.test;
+const test = QUnit.test// eslint-disable-line
 
-QUnit.module('Render Todo Item');
+QUnit.module('Render Todo Item');// eslint-disable-line
 
 test('renders html from data', assert => {
     const todo = {
