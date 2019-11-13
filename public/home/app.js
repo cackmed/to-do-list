@@ -1,5 +1,5 @@
 import Component from '../Component.js';
-import Header from '../common/Header.js';
+import Header from '../common/header.js';
 
 class App extends Component {
 

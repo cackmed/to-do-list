@@ -1,8 +1,8 @@
 import Component from '../Component.js';
-import Header from '../common/Header.js';
-import Loading from '../common/Loading.js';
-import AddTodo from './AddTodo.js';
-import TodoList from './TodoList.js';
+import Header from '../common/header.js';
+import Loading from '../common/loading.js';
+import AddTodo from './Addtodo.js';
+import TodoList from './todoList.js';
 import { getTodos, addTodo, updateTodo, removeTodo } from '../services/todo-api.js';
 class TodoApp extends Component {
 
