@@ -76,15 +76,44 @@ class App extends Component {
     
 
     renderHTML() {
-        return /*html*/`
+        const user = localStorage.getItem('USER');
+
+        if (user) {
+            return /*html*/`
             <div>
                 <!-- header goes here -->
                 <main>
-                    <p>This will be the user login on day 2 or will it?</p>
+                    <section class="user-display">
+                        <p>
+                            Signed in as ${user}
+                        </p>
+                        <p>
+                            <button class="logout">Logout</button>
+                        </p>
                 </main>
+            </div>
+        `;
+        }
+        return /*html*/`
+            <div>
+            <main>
+                <p class="errors"></p>
+
+                <section class="no-display" id="signup-container">
+                    <p class="switch">
+                        <button id=signin-button>Already a User?</button>
+                    </p>
+                </section>
+                <section id="signin-container">
+                    <p class="switch">
+                        <button id="signup-button">Need to create an Account?</button>
+                    </p>
+                </section>
+            </main>
             </div>
         `;
     }
 }
+        
 
 export default App;
