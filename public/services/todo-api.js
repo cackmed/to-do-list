@@ -65,7 +65,7 @@ export function addTodo(todo) {
 }
 
 export function updateTodo(todo) {
-    const url = `${URL}/todos/${todo.user_id}`;
+    const url = `${URL}/todos/${todo.id}`;
     return fetchWithError(url, {
         method: 'PUT',
         headers: {

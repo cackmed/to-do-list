@@ -18,7 +18,7 @@ async function run() {
                 display_name VARCHAR(256) NOT NULL
             );
             CREATE TABLE todos (
-                user_id INTEGER NOT NULL REFERENCES users(id),
+                id INTEGER NOT NULL REFERENCES users(id),
                 task VARCHAR(512) NOT NULL,
                 complete BOOLEAN NOT NULL DEFAULT FALSE
             );

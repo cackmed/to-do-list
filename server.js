@@ -48,7 +48,7 @@ app.get('/api/todos', async (req, res) => {
     try {
         const result = await client.query(`
             SELECT * FROM todos
-            WHERE user_id = $1
+            WHERE id = $1
         `,
         [req.userId]);
         res.json(result.rows);
@@ -67,7 +67,7 @@ app.post('/api/todos', async (req, res) => {
 
     try {
         const result = await client.query(`
-            INSERT INTO todos (task, complete, user_id)
+            INSERT INTO todos (task, complete, id)
             VALUES ($1, $2, $3)
             RETURNING *
         `,
