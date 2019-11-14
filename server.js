@@ -17,13 +17,38 @@ app.use(cors()); // enable CORS request
 app.use(express.static('public')); // server files from /public folder
 app.use(express.json()); // enable reading incoming json data
 
-// API Routes
 
+//Auth
+const ensureAuth = require('./lib/auth/ensure-auth.js');
+const createAuthRoutes = require('./lib/auth/create-auth-routes.js');
+const authRoutes = createAuthRoutes({
+    selectUser(email) {
+        return client.query(`
+        SELECT id, email, hash, display_name as "displayName"
+        FROM users
+        WHERE email = $1;
+        `,
+        [email]).then(result => result.rows[0]);
+    },
+    insertUser(user, hash) {
+        console.log(user);
+        return client.query(`
+        INSERT into users (email, hash, display_name)
+        VALUES ($1, $2, $3)
+        RETURNING id, email, display_name as display_name as "displayName";
+        `,
+        [user.email, hash, user.displayName]).then(result => result.rows[0]);
+    }
+});
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api', ensureAuth);
 // *** TODOS ***
 app.get('/api/todos', async (req, res) => {
     try {
         const result = await client.query(`
             SELECT * FROM todos;
+            
         `);
         res.json(result.rows);
     }
