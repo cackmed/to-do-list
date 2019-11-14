@@ -8,6 +8,12 @@ if (!token && !(location.pathname === '/' || location.pathname === '/index.html'
 }
 
 async function fetchWithError(url, options) {
+    if (token) {
+        options = options || {};
+        options.headers = options.headers || {};
+        options.headers.Authorization = token;
+    }
+
     const response = await fetch(url, options);
     const data = await response.json();
 
@@ -18,6 +24,7 @@ async function fetchWithError(url, options) {
         throw data.error;
     }
 }
+
 export function userSignUp(user) {
     const url = `${URL}/auth/signup`;
     return fetchWithError(url, {
