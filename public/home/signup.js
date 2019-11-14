@@ -3,7 +3,7 @@ import Component from '../Component.js';
 class UserSignUp extends Component {
 
     onRender(form) {
-        const onUserSignUp = this.props.onUserSignUp;
+        const onUserSignUp = this.props.UserSignUp;
 
         form.addEventListener('submit', event => {
             event.preventDefault();

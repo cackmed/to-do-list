@@ -70,7 +70,7 @@ class App extends Component {
         const switchToSignUpForm = dom.querySelector('#signup-button');
         switchToSignUpForm.addEventListener('click', () => {
             signUpContainer.classList.remove('no-display');
-            signInContainer.classlist.add('no-display');
+            signInContainer.classList.add('no-display');
         });
     }
     
