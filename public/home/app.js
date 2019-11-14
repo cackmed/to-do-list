@@ -1,8 +1,9 @@
 import Component from '../Component.js';
 import Header from '../common/header.js';
-import UserSignUp from './signup.js';
+import SignUp from './signup.js';
 import SignIn from './signin.js';
 import { userSignUp, userSignIn } from '../services/todo-api.js';
+
 
 function success(user) {
     localStorage.setItem('TOKEN', user.token);
@@ -31,8 +32,8 @@ class App extends Component {
         const signUpContainer = dom.querySelector('#signup-container');
         const signInContainer = dom.querySelector('#signin-container');
 
-        const userSignUp = new UserSignUp({
-            onUserSignUp: async newUser => {
+        const signUp = new SignUp({
+            onSignUp: async newUser => {
                 errors.textContent = '';
                 try {
                     const user = await userSignUp(newUser);
@@ -44,8 +45,33 @@ class App extends Component {
                 }
             }
         });
-        signUpContainer.appendChild(userSignIn.renderDOM());
+        signUpContainer.appendChild(signUp.renderDOM());
 
+        const signIn = new SignIn({
+            onSignIn: async credentials => {
+                errors.textContent = '';
+                try {
+                    const user = await userSignIn(credentials);
+                    success(user);
+                }
+                catch (err) {
+                    errors.textContent = err;
+                    throw err;
+                }
+            }
+        });
+        signInContainer.appendChild(signIn.renderDOM());
+
+        const switchToSignInForm = dom.querySelector('#signin-button');
+        switchToSignInForm.addEventListener('click', () => {
+            signInContainer.classList.remove('no-display');
+            signUpContainer.classList.add('no-display');
+        });
+        const switchToSignUpForm = dom.querySelector('#signup-button');
+        switchToSignUpForm.addEventListener('click', () => {
+            signUpContainer.classList.remove('no-display');
+            signInContainer.classlist.add('no-display');
+        });
     }
     
 
