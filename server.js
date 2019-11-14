@@ -47,11 +47,10 @@ app.use('/api', ensureAuth);
 app.get('/api/todos', async (req, res) => {
     try {
         const result = await client.query(`
-            SELECT * FROM todos t
-            JOIN users u
-            ON t.user_id = u.id;
-        `
-        );
+            SELECT * FROM todos
+            WHERE user_id = $1
+        `,
+        [req.userId]);
         res.json(result.rows);
     }
     catch (err) {
@@ -68,11 +67,11 @@ app.post('/api/todos', async (req, res) => {
 
     try {
         const result = await client.query(`
-            INSERT INTO todos (task, complete)
-            VALUES ($1, $2)
+            INSERT INTO todos (task, complete, user_id)
+            VALUES ($1, $2, $3)
             RETURNING *
         `,
-        [todo.task, todo.complete]);
+        [todo.task, todo.complete, req.userId]);
 
         res.json(result.rows[0]);
     }
@@ -92,7 +91,7 @@ app.put('/api/todos/:id', async (req, res) => {
         const result = await client.query(`
             UPDATE todos
             SET   task = $2,
-                  complete = $3  
+                  complete = $3 
             WHERE id = $1
             RETURNING *;
         `, 

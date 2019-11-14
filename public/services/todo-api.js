@@ -57,6 +57,7 @@ export function addTodo(todo) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': token
         },
         body: JSON.stringify(todo)
     });  
@@ -64,11 +65,12 @@ export function addTodo(todo) {
 }
 
 export function updateTodo(todo) {
-    const url = `${URL}/todos/${todo.id}`;
+    const url = `${URL}/todos/${todo.user_id}`;
     return fetchWithError(url, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json', 
+            'Content-Type': 'application/json',
+            'Authorization': token 
         },
         body: JSON.stringify(todo)
     });  
@@ -78,7 +80,8 @@ export function removeTodo(todoId) {
     console.log(todoId);
     const url = `${URL}/todos/${todoId}`;
     return fetchWithError(url, {
-        method: 'DELETE'
+        method: 'DELETE',
+        'Authorization': token
     });  
 }
 
