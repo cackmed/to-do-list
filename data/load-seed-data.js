@@ -13,7 +13,7 @@ async function run() {
         const UserInfo = await Promise.all(
             users.map(async user => {
                 const result = await client.query(`
-            INSET INTO users (id)
+            INSERT INTO users (id)
             VALUES ($1)
             RETURNING *;
             `,
