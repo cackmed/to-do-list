@@ -19,8 +19,8 @@ app.use(express.json()); // enable reading incoming json data
 
 
 //Auth
-const ensureAuth = require('./lib/auth/ensure-auth.js');
-const createAuthRoutes = require('./lib/auth/create-auth-routes.js');
+const ensureAuth = require('./lib/auth/ensure-auth');
+const createAuthRoutes = require('./lib/auth/create-auth-routes');
 const authRoutes = createAuthRoutes({
     selectUser(email) {
         return client.query(`
@@ -35,7 +35,7 @@ const authRoutes = createAuthRoutes({
         return client.query(`
         INSERT into users (email, hash, display_name)
         VALUES ($1, $2, $3)
-        RETURNING id, email, display_name as display_name as "displayName";
+        RETURNING id, email, display_name as "displayName";
         `,
         [user.email, hash, user.displayName]).then(result => result.rows[0]);
     }
@@ -50,9 +50,8 @@ app.get('/api/todos', async (req, res) => {
             SELECT * FROM todos t;
             JOIN users u
             ON t.user_id = u.id
-            WhHERE c.id = $1
-
-        `);
+        `
+        );
         res.json(result.rows);
     }
     catch (err) {

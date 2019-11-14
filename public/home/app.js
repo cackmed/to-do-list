@@ -7,7 +7,7 @@ import { userSignUp, userSignIn } from '../services/todo-api.js';
 
 function success(user) {
     localStorage.setItem('TOKEN', user.token);
-    localStorage.setItem('User', user.displayName);
+    localStorage.setItem('USER', user.displayName);
     const searchParams = new URLSearchParams(location.search);
     location = searchParams.get('redirect') || './todo.html';
 }

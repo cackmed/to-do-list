@@ -19,7 +19,7 @@ async function fetchWithError(url, options) {
     }
 }
 export function userSignUp(user) {
-    const url = '${URL}/auth/signup';
+    const url = `${URL}/auth/signup`;
     return fetchWithError(url, {
         method: 'POST',
         headers: {
@@ -29,7 +29,7 @@ export function userSignUp(user) {
     });
 }
 export function userSignIn(credentials) {
-    const url = '${URL}/auth/signin';
+    const url = `${URL}/auth/signin`;
     return fetchWithError(url, {
         method: 'POST',
         headers: {
