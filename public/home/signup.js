@@ -34,6 +34,9 @@ class UserSignUp extends Component {
                     <label for="password">Password</label>
                     <input id="password" type="password" name="password" required>
                 </p>
+                <p>
+                    <button>Sign Up</button>
+                </p>
             </form>
         `;
     }
