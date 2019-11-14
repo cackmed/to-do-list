@@ -16,6 +16,13 @@ async function run() {
                 task VARCHAR(512) NOT NULL,
                 complete BOOLEAN NOT NULL DEFAULT FALSE
             );
+            CREATE TABLE users (
+                id SERIAL PRIMARY KEY,
+                email VARCHAR(256) NOT NULL,
+                hash VARCHAR(512) NOT NULL,
+                display_name VARCHAR(256) NOT NULL
+            );
+
         `);
 
         console.log('create tables complete');
