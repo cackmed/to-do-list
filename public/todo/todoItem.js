@@ -6,12 +6,14 @@ class TodoItem extends Component {
         const todo = this.props.todo;
         const onUpdate = this.props.onUpdate;
         const onRemove = this.props.onRemove;
-
+        const todoList = document.getElementById('to-do-task');
         const markOffItem = dom.querySelector('.inactive-button');
         markOffItem.addEventListener('click', () => {
             todo.complete = !todo.complete;
             console.log(todo);
             onUpdate(todo);
+            todoList.classlist.add('strike');
+            
         });
         const removeItem = dom.querySelector('.remove-button');
         removeItem.addEventListener('click', () => {
@@ -26,7 +28,7 @@ class TodoItem extends Component {
         const todo = this.props.todo;
 
         return /*html*/`
-    <li class = "to-do-task">
+    <li class = "to-do-task" id="to-do-task">
         <p class=>${todo.task}</p>
         <span class="${todo.complete ? 'false' : ''}">Is it complete? "${todo.complete}</span>
         <div>
