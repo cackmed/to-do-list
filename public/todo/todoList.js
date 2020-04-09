@@ -1,5 +1,5 @@
 import Component from '../Component.js';
-import TodoItem from './TodoItem.js';
+import TodoItem from './todoItem.js';
 
 class TodoList extends Component {
     
@@ -8,11 +8,14 @@ class TodoList extends Component {
         const onUpdate = this.props.onUpdate;
         const onRemove = this.props.onRemove;
 
-        
+        todos
+            .map(todo => new TodoItem({ todo, onUpdate, onRemove }))
+            .map(TodoItem => TodoItem.renderDOM())
+            .forEach(dom => list.appendChild(dom));
     }
     renderHTML() {
         return /*html*/`
-            
+            <ul class="todo-list"></ul>
         `;
     }
 }

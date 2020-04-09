@@ -1,1 +1,13 @@
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-around;
+    background: slategray;
+    border-bottom: 1px black;
+}
+
+img {
+    height: 80px;
+}
 

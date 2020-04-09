@@ -1,31 +1,23 @@
 const client = require('../lib/client');
 
-// async/await needs to run in a function
 run();
 
 async function run() {
 
     try {
-        // initiate connecting to db
         await client.connect();
     
-        // run a query to create tables
         await client.query(`
-            CREATE TABLE todos (
-                id SERIAL PRIMARY KEY NOT NULL,
-                task VARCHAR(512) NOT NULL,
-                complete BOOLEAN NOT NULL DEFAULT FALSE
-            );
+            DROP TABLE IF EXISTS todos;
+            DROP TABLE IF EXISTS users;
         `);
 
-        console.log('create tables complete');
+        console.log('drop tables complete');
     }
     catch (err) {
-        // problem? let's see the error...
         console.log(err);
     }
     finally {
-        // success or failure, need to close the db connection
         client.end();
     }
     

@@ -1,4 +1,4 @@
-import TodoApp from './TodoApp.js';
+import TodoApp from './todoApp.js';
 
 const app = new TodoApp();
 document.body.prepend(app.renderDOM());

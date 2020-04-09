@@ -17,16 +17,40 @@ app.use(cors()); // enable CORS request
 app.use(express.static('public')); // server files from /public folder
 app.use(express.json()); // enable reading incoming json data
 
-// API Routes
 
+//Auth
+const ensureAuth = require('./lib/auth/ensure-auth');
+const createAuthRoutes = require('./lib/auth/create-auth-routes');
+const authRoutes = createAuthRoutes({
+    selectUser(email) {
+        return client.query(`
+        SELECT id, email, hash, display_name as "displayName"
+        FROM users
+        WHERE email = $1;
+        `,
+        [email]).then(result => result.rows[0]);
+    },
+    insertUser(user, hash) {
+        console.log(user);
+        return client.query(`
+        INSERT into users (email, hash, display_name)
+        VALUES ($1, $2, $3)
+        RETURNING id, email, display_name as "displayName";
+        `,
+        [user.email, hash, user.displayName]).then(result => result.rows[0]);
+    }
+});
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api', ensureAuth);
 // *** TODOS ***
 app.get('/api/todos', async (req, res) => {
-
     try {
         const result = await client.query(`
-            
-        `);
-
+            SELECT * FROM todos
+            WHERE id = $1
+        `,
+        [req.userId]);
         res.json(result.rows);
     }
     catch (err) {
@@ -43,9 +67,11 @@ app.post('/api/todos', async (req, res) => {
 
     try {
         const result = await client.query(`
-            
+            INSERT INTO todos (task, complete, id)
+            VALUES ($1, $2, $3)
+            RETURNING *
         `,
-        [/* pass in data */]);
+        [todo.task, todo.complete, req.userId]);
 
         res.json(result.rows[0]);
     }
@@ -60,11 +86,16 @@ app.post('/api/todos', async (req, res) => {
 app.put('/api/todos/:id', async (req, res) => {
     const id = req.params.id;
     const todo = req.body;
-
+    console.log(todo);
     try {
         const result = await client.query(`
-            
-        `, [/* pass in data */]);
+            UPDATE todos
+            SET   task = $2,
+                  complete = $3 
+            WHERE id = $1
+            RETURNING *;
+        `, 
+        [id, todo.task, todo.complete]);
      
         res.json(result.rows[0]);
     }
@@ -78,12 +109,14 @@ app.put('/api/todos/:id', async (req, res) => {
 
 app.delete('/api/todos/:id', async (req, res) => {
     // get the id that was passed in the route:
-    const id = 0; // ???
+    const id = req.params.id; // ???
 
     try {
         const result = await client.query(`
-         
-        `, [/* pass data */]);
+         DELETE FROM todos
+         WHERE id = $1
+         RETURNING *;
+        `, [id]);
         
         res.json(result.rows[0]);
     }

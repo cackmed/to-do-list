@@ -6,7 +6,7 @@ class Header extends Component {
 
         return /*html*/`
             <header>
-                <img class="logo" src="assets/alchemy-logo.png" alt="Alchemy Code Lab Logo">
+                <img class="logo" src="assets/logo-placeholder-generic.200x200.png" alt="Placeholder Logo">
                 <h1>${title}</h1>
                 <nav>
                     <a href="./">Home</a>
